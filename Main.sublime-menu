@@ -7,9 +7,8 @@
     "children":
     [
 {"caption":"New Django Site",
-"command" : "relativedjango",
-
-},
+"command" : "relativedjango"
+}
 
     ]
 }
