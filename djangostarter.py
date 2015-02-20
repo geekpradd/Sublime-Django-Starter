@@ -51,7 +51,7 @@ class DjangoCreate:
         return join(location, 'manage.py')
 
 
-class NewDjangoCommand(sublime_plugin.WindowCommand):
+class NewdjangoCommand(sublime_plugin.WindowCommand):
 
     def run(self, paths=[]):
         self.path = paths
@@ -72,7 +72,7 @@ class NewDjangoCommand(sublime_plugin.WindowCommand):
         self.window.open_file(manage)
 
 
-class RelativeDjangoCommand(sublime_plugin.TextCommand):
+class RelativedjangoCommand(sublime_plugin.TextCommand):
 
     def run(self, edit):
         f = self.view.file_name()
