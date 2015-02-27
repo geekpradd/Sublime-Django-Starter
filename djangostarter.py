@@ -1,8 +1,9 @@
 import sublime
-import sublime_plugin, platform 
+import sublime_plugin
 import os
+import platform
 join = os.path.join
-IS_MAC = plaform.system().lower() == "darwin"
+IS_MAC = platform.system().lower() == "darwin"
 IS_LINUX = "linux" in platform.system()
 try:
     from .djangoFileCode import *
@@ -54,7 +55,7 @@ class DjangoCreate:
         return join(location, 'manage.py')
 
 
-class NewdjangoCommand(sublime_plugin.WindowCommand):
+class newCommand(sublime_plugin.WindowCommand):
 
     def run(self, paths=[]):
         self.path = paths
@@ -78,7 +79,7 @@ class NewdjangoCommand(sublime_plugin.WindowCommand):
         self.window.open_file(manage)
 
 
-class RelativedjangoCommand(sublime_plugin.TextCommand):
+class relativeCommand(sublime_plugin.TextCommand):
 
     def run(self, edit):
         f = self.view.file_name()
