@@ -1,7 +1,9 @@
 import sublime
-import sublime_plugin
+import sublime_plugin, platform 
 import os
 join = os.path.join
+IS_MAC = plaform.system().lower() == "darwin"
+IS_LINUX = "linux" in platform.system()
 try:
     from .djangoFileCode import *
 except:
@@ -12,7 +14,8 @@ class DjangoCreate:
 
     @staticmethod
     def createMainFolder(path, project, app):
-        path = path[0] + '\\' + project
+        path = join(path[0], project)
+        
         if not os.path.exists(path):
             os.makedirs(path)
         return path
@@ -66,7 +69,10 @@ class NewdjangoCommand(sublime_plugin.WindowCommand):
     def doRest(self, appName):
         for index, elem in enumerate(self.path):
             if '.' in elem:
-                self.path[index] = elem.replace(elem.split('\\')[-1], '')
+                if IS_MAC or IS_LINUX:
+                    self.path[index] = elem.replace(elem.split('/')[-1], '')
+                else:
+                    self.path[index] = elem.replace(elem.split('\\')[-1], '')
         p = DjangoCreate.createMainFolder(self.path, self.project, appName)
         manage = DjangoCreate.createProjectFiles(p, self.project, appName)
         self.window.open_file(manage)
@@ -92,4 +98,6 @@ class RelativedjangoCommand(sublime_plugin.TextCommand):
         sublime.active_window().open_file(manage)
 
     def getFolderName(self, file):
+        if IS_MAC or IS_LINUX:
+            return file.replace(file.split('/')[-1], '')
         return file.replace(file.split('\\')[-1], '')
